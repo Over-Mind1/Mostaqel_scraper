@@ -1,0 +1,48 @@
+# Filter config for Mostaqel alerts
+# Leave values empty/null to disable that filter.
+
+# Native Mostaqel category filters (site categories).
+# Remove any slug you do not want to monitor.
+#
+# business                  = أعمال وخدمات استشارية
+# development               = برمجة، تطوير المواقع والتطبيقات
+# ai-machine-learning       = ذكاء اصطناعي وتعلم الآلة
+# engineering-architecture  = هندسة، عمارة وتصميم داخلي
+# design                    = تصميم، فيديو وصوتيات
+# marketing                 = تسويق إلكتروني ومبيعات
+# writing-translation       = كتابة، تحرير، ترجمة ولغات
+# support                   = دعم، مساعدة وإدخال بيانات
+# training                  = تدريب وتعليم عن بعد
+site_categories:
+  - business
+  - development
+  - ai-machine-learning
+  - engineering-architecture
+  - design
+  - marketing
+  - writing-translation
+  - support
+  - training
+
+include_keywords:
+
+
+exclude_keywords:
+
+
+include_categories: []
+exclude_categories: []
+
+# Hours since project publish time. Null disables this filter.
+max_age_hours: 24
+
+# Bid count filters
+max_bids: 10
+min_bids: null
+
+# Budget filters are applied only when budget is available.
+min_budget: null
+max_budget: null
+
+# If true, projects that miss a field required by filters are skipped.
+strict_missing_fields: false
