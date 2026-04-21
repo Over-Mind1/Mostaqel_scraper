@@ -19,7 +19,34 @@ A lightweight Python monitor that watches Mostaqel open projects, keeps track of
 - Supports first-run bootstrapping to avoid old-project spam
 - Includes `--dry-run` for safe local testing
 
-## Project Layout
+## Project Structure
+
+```text
+.
+├── docker-compose.yml
+├── Dockerfile
+├── filters.yml
+├── monitor.py
+├── README.md
+├── requirements.txt
+├── setup-linux.sh
+├── src
+│   ├── mostaql_alert
+│   │   ├── config.py
+│   │   ├── filters.py
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   ├── models.py
+│   │   ├── notifier.py
+│   │   ├── runner.py
+│   │   ├── scraper.py
+│   │   └── state.py
+│   └── utils
+│       └── __init__.py
+└── structure.txt
+```
+
+Key files:
 
 - `monitor.py`: root entrypoint
 - `src/mostaql_alert/main.py`: CLI parsing and application flow
