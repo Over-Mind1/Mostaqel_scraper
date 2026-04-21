@@ -1,0 +1,11 @@
+services:
+  mostaql-alert:
+    build: .
+    container_name: mostaql-alert
+    env_file:
+      - .env
+    volumes:
+      - ./.state:/app/.state
+      - ./filters.yml:/app/filters.yml:ro
+    restart: unless-stopped
+    command: ["python", "monitor.py"]
