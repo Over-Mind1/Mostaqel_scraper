@@ -14,13 +14,13 @@
 # support                   = دعم، مساعدة وإدخال بيانات
 # training                  = تدريب وتعليم عن بعد
 site_categories:
-  - business
+ # - business
   - development
   - ai-machine-learning
-  - engineering-architecture
-  - design
-  - marketing
-  - writing-translation
+  #- engineering-architecture
+ # - design
+  #- marketing
+  #- writing-translation
   - support
   - training
 
