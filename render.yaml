@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: mostaql-alert
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python monitor.py
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: PYTHONUNBUFFERED
+        value: true

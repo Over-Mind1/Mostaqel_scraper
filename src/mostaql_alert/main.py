@@ -2,8 +2,13 @@ from __future__ import annotations
 
 import argparse
 import logging
+import os
 import sys
+import threading
 from urllib.parse import urlencode, urlsplit, urlunsplit
+
+from fastapi import FastAPI
+import uvicorn
 
 from .config import load_settings
 from .filters import ProjectFilter, load_filter_config
@@ -11,6 +16,26 @@ from .notifier import TelegramNotifier
 from .runner import AlertRunner, run_forever
 from .scraper import MostaqlScraper
 from .state import SeenProjectsStore
+
+
+# FastAPI app for Render health checks
+app = FastAPI()
+
+
+@app.get("/")
+def read_root():
+    return {"status": "Bot and Scraper are running!"}
+
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
+
+
+def run_api_server():
+    """Run the FastAPI server in a background thread."""
+    port = int(os.environ.get("PORT", 10000))
+    uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -118,6 +143,13 @@ def main() -> int:
         len(projects_urls),
         interval,
     )
+
+    # Start FastAPI server in a background thread to keep Render alive
+    api_thread = threading.Thread(target=run_api_server, daemon=True)
+    api_thread.start()
+    logger.info("FastAPI server started in background")
+
+    # Run the bot in the main thread
     run_forever(
         runner=runner,
         interval_seconds=interval,
